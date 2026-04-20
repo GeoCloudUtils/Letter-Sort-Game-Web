@@ -304,15 +304,17 @@ function TubeBall({
   largeText,
   selected,
   palette,
+  dense,
 }: {
   letter: string;
   largeText: boolean;
   selected: boolean;
   palette: string;
+  dense: boolean;
 }) {
   return (
     <div
-      className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-gradient-to-br ${palette} text-white shadow-lg sm:h-12 sm:w-12 ${largeText ? "text-xl" : "text-lg"} font-black tracking-wide transition-all duration-200 ${selected ? "scale-110 ring-4 ring-yellow-300/80" : "hover:scale-105"}`}
+      className={`flex items-center justify-center rounded-full border border-white/60 bg-gradient-to-br ${palette} text-white shadow-lg ${dense ? "h-9 w-9 text-base min-[380px]:h-10 min-[380px]:w-10 sm:h-11 sm:w-11" : `h-11 w-11 sm:h-12 sm:w-12 ${largeText ? "text-xl" : "text-lg"}`} ${dense && largeText ? "sm:text-lg" : ""} font-black tracking-wide transition-all duration-200 ${selected ? "scale-110 ring-4 ring-yellow-300/80" : "hover:scale-105"}`}
     >
       <span className="drop-shadow-sm">{letter}</span>
     </div>
@@ -329,7 +331,7 @@ function TubeView({
   largeText,
   bounce,
   paletteMap,
-  mobileCompact,
+  denseLayout,
   isNight,
 }: {
   tube: Tube;
@@ -341,29 +343,34 @@ function TubeView({
   largeText: boolean;
   bounce?: boolean;
   paletteMap: Record<string, string>;
-  mobileCompact: boolean;
+  denseLayout: boolean;
   isNight: boolean;
 }) {
   const slots = Array.from({ length: capacity }, (_, i) => tube[i] ?? null);
   const topIndex = tube.length - 1;
-  const compactClasses = mobileCompact ? "h-[218px] w-[64px] xs:w-[68px]" : "h-[240px] w-[68px] sm:h-[292px] sm:w-[82px]";
+  const tubeClasses = denseLayout
+    ? "h-[208px] w-[58px] rounded-[24px] px-1 pb-2.5 pt-4 min-[380px]:h-[222px] min-[380px]:w-[62px] sm:h-[280px] sm:w-[76px] sm:rounded-[28px] sm:px-1.5 sm:pb-3 sm:pt-5"
+    : "h-[240px] w-[68px] rounded-[30px] px-1.5 pb-3 pt-5 sm:h-[292px] sm:w-[82px]";
+  const slotClasses = denseLayout ? "h-9 w-9 min-[380px]:h-10 min-[380px]:w-10 sm:h-11 sm:w-11" : "h-11 w-11 sm:h-12 sm:w-12";
+  const stackGapClasses = denseLayout ? "gap-1 min-[380px]:gap-1.5 sm:gap-2" : "gap-1.5 sm:gap-2";
 
   return (
     <button
       onClick={onClick}
-      className={`relative flex flex-col-reverse items-center rounded-[30px] border-2 px-1.5 pb-3 pt-5 transition-all duration-300 ${compactClasses} ${bounce ? "animate-[tubeBounce_0.24s_ease-in-out]" : ""} ${selected ? "border-yellow-300 bg-yellow-200/15 shadow-[0_0_24px_rgba(253,224,71,0.45)]" : isNight ? "border-white/25 bg-white/10 hover:bg-white/15" : "border-slate-300 bg-white/70 hover:bg-white/90"} ${solved ? "outline outline-2 outline-emerald-400" : ""}`}
+      className={`relative flex flex-col-reverse items-center border-2 transition-all duration-300 ${tubeClasses} ${bounce ? "animate-[tubeBounce_0.24s_ease-in-out]" : ""} ${selected ? "border-yellow-300 bg-yellow-200/15 shadow-[0_0_24px_rgba(253,224,71,0.45)]" : isNight ? "border-white/25 bg-white/10 hover:bg-white/15" : "border-slate-300 bg-white/70 hover:bg-white/90"} ${solved ? "outline outline-2 outline-emerald-400" : ""}`}
       aria-label={`Tube ${index + 1}`}
     >
       <div className={`absolute inset-x-3 bottom-1.5 h-1.5 rounded-full ${isNight ? "bg-white/70" : "bg-slate-400"}`} />
-      <div className="flex h-full flex-col-reverse items-center justify-start gap-1.5 sm:gap-2">
+      <div className={`flex h-full flex-col-reverse items-center justify-start ${stackGapClasses}`}>
         {slots.map((letter, i) => (
-          <div key={`${index}-${i}`} className="flex h-11 w-11 items-center justify-center sm:h-12 sm:w-12">
+          <div key={`${index}-${i}`} className={`flex items-center justify-center ${slotClasses}`}>
             {letter ? (
               <TubeBall
                 letter={letter}
                 largeText={largeText}
                 selected={selected && i === topIndex}
                 palette={paletteMap[letter] ?? "from-slate-500 to-slate-400"}
+                dense={denseLayout}
               />
             ) : null}
           </div>
@@ -424,7 +431,17 @@ export default function WordSortPuzzleModern() {
   const completedCount = useMemo(() => Object.keys(progress.completed).length, [progress.completed]);
   const solved = useMemo(() => (level ? isLevelSolved(tubes, level, settings.readDirection) : false), [tubes, level, settings.readDirection]);
   const isNight = settings.theme === "night";
-  const mobileCompact = !!level && level.words.length + EMPTY_TUBES <= 4;
+  const tubeCount = level ? level.words.length + EMPTY_TUBES : 0;
+  const denseBoard = !!level && (tubeCount >= 6 || level.capacity >= 6);
+  const boardColumnsClass = !level
+    ? ""
+    : tubeCount <= 4
+      ? "grid-cols-4"
+      : tubeCount <= 6
+        ? "grid-cols-3 min-[380px]:grid-cols-4 sm:grid-cols-6"
+        : "grid-cols-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7";
+  const boardGapClass = denseBoard ? "gap-2 min-[380px]:gap-2.5 sm:gap-3" : "gap-3 sm:gap-4";
+  const boardMaxWidthClass = denseBoard ? "max-w-[21.5rem] sm:max-w-[24rem] md:max-w-[29rem] lg:max-w-[42rem]" : "max-w-[22rem] sm:max-w-[38rem] lg:max-w-[44rem]";
 
   const paletteMap = useMemo(() => {
     if (!level) return {} as Record<string, string>;
@@ -785,9 +802,9 @@ export default function WordSortPuzzleModern() {
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <div className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">{level.title}</div>
-                    <h2 className="mt-1 text-2xl font-black sm:text-3xl">{level.words.length} words • {level.words.length + EMPTY_TUBES} tubes • capacity {level.capacity}</h2>
+                    <h2 className="mt-1 text-xl font-black leading-tight sm:text-3xl">{level.words.length} words • {level.words.length + EMPTY_TUBES} tubes • capacity {level.capacity}</h2>
                   </div>
-                  <div className="grid grid-cols-3 gap-2 sm:flex">
+                  <div className="grid w-full grid-cols-1 gap-2 min-[420px]:grid-cols-3 lg:w-auto">
                     <div className={`rounded-2xl border px-3 py-2 text-sm font-bold ${chip}`}>Moves: {moveCount}</div>
                     <div className={`rounded-2xl border px-3 py-2 text-sm font-bold ${chip}`}>Time: {formatElapsed(now - startedAt)}</div>
                     <div className={`rounded-2xl border px-3 py-2 text-sm font-bold ${chip}`}>Par: {level.par}</div>
@@ -808,7 +825,7 @@ export default function WordSortPuzzleModern() {
                 )}
 
                 <div className={`rounded-[30px] border p-3 sm:p-5 ${isNight ? "border-white/10 bg-black/15" : "border-slate-200 bg-white/65"}`}>
-                  <div className={`mx-auto flex ${mobileCompact ? "w-full max-w-[340px] justify-center gap-2.5 flex-nowrap" : "flex-wrap justify-center gap-3 sm:gap-4"}`}>
+                  <div className={`mx-auto grid w-fit max-w-full place-content-center ${boardColumnsClass} ${boardGapClass} ${boardMaxWidthClass}`}>
                     {tubes.map((tube, index) => (
                       <TubeView
                         key={`${level.id}-${index}`}
@@ -821,7 +838,7 @@ export default function WordSortPuzzleModern() {
                         largeText={settings.largeText}
                         bounce={animatingMove?.tubeIndex === index}
                         paletteMap={paletteMap}
-                        mobileCompact={mobileCompact}
+                        denseLayout={denseBoard}
                         isNight={isNight}
                       />
                     ))}
