@@ -148,8 +148,7 @@ function getWordCount(id: number) {
   if (id <= 35) return 3;
   if (id <= 60) return 4;
   if (id <= 80) return 5;
-  if (id <= 92) return 6;
-  return 7;
+  return 6;
 }
 
 function getCapacity() {
