@@ -69,24 +69,46 @@ const DEFAULT_PROGRESS: ProgressData = {
 
 const WORD_BANK: Record<number, string[]> = {
   3: [
-    "SUN", "DOG", "CAT", "MAP", "CAR", "BEE", "FOX", "SKY", "SEA", "BOX",
-    "ANT", "OWL", "PEN", "CUP", "HAT", "BAT", "RUG", "LOG", "BAG", "KEY",
+    "ANT", "ARM", "BAG", "BAT", "BAY", "BED", "BEE", "BOX", "BUS", "CAP",
+    "CAR", "CAT", "COW", "CUP", "DAY", "DOG", "DOT", "EAR", "EGG", "EYE",
+    "FAN", "FIG", "FIN", "FOX", "GEM", "HAT", "HEN", "ICE", "INK", "JAM",
+    "JAR", "JET", "KEY", "KID", "LEG", "LOG", "MAP", "MUG", "NET", "NUT",
+    "OWL", "PAN", "PEN", "PIG", "PIN", "POT", "RAT", "RUG", "SEA", "SEW",
+    "SKY", "SUN", "TAG", "TEN", "TIN", "TOY", "VAN", "WEB", "WIN", "ZIP",
+    "BOW", "CAN", "COP", "COT", "DIG", "ELK", "FOG", "GAP", "HOP", "JOY",
+    "LID", "MOP", "NAP", "OAK", "PEA", "ROD", "RUN", "SAD", "TOP", "YAK"
   ],
   4: [
-    "MOON", "STAR", "FISH", "BOOK", "TREE", "BIRD", "WIND", "RAIN", "SHIP", "FROG",
-    "LION", "FORK", "MILK", "SAND", "RING", "SNOW", "ROAD", "CAKE", "FARM", "PLAY",
-    "KING", "CORN", "DUCK", "WAVE", "ROSE", "LAMP", "MINT", "WOLF", "DOOR", "SEED",
+    "BOOK", "BOOT", "BIRD", "BEAR", "BELL", "BLUE", "BOAT", "BARN", "CAKE", "CAMP",
+    "CARD", "CART", "CORN", "CAVE", "COAT", "COIN", "COLD", "DEER", "DOOR", "DUCK",
+    "DUST", "FARM", "FISH", "FIRE", "FORK", "FROG", "GAME", "GATE", "GOLD", "GRAB",
+    "HAND", "HARP", "HEAT", "HILL", "HOME", "JUMP", "KING", "KITE", "LAMP", "LAKE",
+    "LEAF", "LION", "LOCK", "MAIL", "MARK", "MILK", "MINT", "MOON", "MOSS", "NEST",
+    "NOTE", "PARK", "PATH", "PLAY", "PINK", "POND", "RAIN", "RING", "ROAD", "ROCK",
+    "ROSE", "SALT", "SAND", "SEED", "SHIP", "SHOP", "SILK", "SNOW", "SOAP", "STAR",
+    "SWAN", "TEAM", "TENT", "TREE", "WALL", "WAVE", "WIND", "WOLF", "WOOD", "YARD",
+    "MASK", "VASE", "DRUM", "LILY", "FLAG", "WIRE", "PINE", "MATH", "FOOT", "DARK"
   ],
   5: [
-    "APPLE", "GRAPE", "PLANT", "STONE", "CLOUD", "SNAKE", "HOUSE", "BREAD", "SMILE", "TRAIN",
-    "SHEEP", "BRICK", "WATER", "LIGHT", "CHAIR", "BEACH", "HORSE", "MUSIC", "HEART", "SWEET",
-    "RIVER", "DREAM", "PIZZA", "PLANE", "BRAIN", "GREEN", "STORY", "FLAME", "CANDY", "SPOON",
+    "APPLE", "BEACH", "BRAIN", "BREAD", "BRICK", "BRUSH", "CANDY", "CHAIR", "CHESS", "CLOUD",
+    "COAST", "CORAL", "CROWN", "DANCE", "DREAM", "DRINK", "EARTH", "EAGLE", "FIELD", "FLAME",
+    "FLOOD", "FLOUR", "FRAME", "FRUIT", "GLASS", "GRAPE", "GRASS", "GREEN", "HEART", "HONEY",
+    "HORSE", "HOUSE", "JUICE", "KNIFE", "LAUGH", "LEMON", "LIGHT", "MAGIC", "MANGO", "MOUSE",
+    "MUSIC", "OCEAN", "OLIVE", "ONION", "PANDA", "PEACH", "PEARL", "PHONE", "PIZZA", "PLANE",
+    "PLANT", "PLATE", "QUEEN", "RIVER", "ROBOT", "SALAD", "SHEEP", "SHINE", "SHIRT", "SMILE",
+    "SNAKE", "SPACE", "SPOON", "SPORT", "STONE", "STORM", "STORY", "SUGAR", "SWEET", "TABLE",
+    "TIGER", "TOAST", "TRAIN", "TRUCK", "WATER", "WHALE", "WHEAT", "WORLD", "ZEBRA", "SHELL"
   ],
   6: [
-    "PLANET", "POCKET", "GARDEN", "ORANGE", "SILVER", "BRIDGE", "FLOWER", "CANDLE", "PIRATE", "WINTER",
-    "CASTLE", "MONKEY", "ROCKET", "STREAM", "MARKET", "BUTTON", "FAMILY", "BOTTLE", "TUNNEL", "SUMMER",
-    "MEADOW", "SPIRIT", "PUZZLE", "THRONE", "ISLAND", "ANCHOR", "FOREST", "COOKIE", "DRAGON", "CIRCLE",
-  ],
+    "ANCHOR", "ANIMAL", "AUTUMN", "BAKERY", "BANANA", "BASKET", "BOTTLE", "BRIDGE", "BUTTON", "CANDLE",
+    "CANYON", "CARROT", "CASTLE", "CEREAL", "CHERRY", "CIRCLE", "COOKIE", "CORNER", "COTTON", "DRAGON",
+    "FAMILY", "FARMER", "FLOWER", "FOREST", "FRIEND", "GARDEN", "GOLDEN", "GUITAR", "ISLAND", "JUNGLE",
+    "KITTEN", "MARKET", "MEADOW", "MEMORY", "MONKEY", "ORANGE", "POCKET", "PLANET", "POETRY", "POTATO",
+    "PUZZLE", "RABBIT", "ROCKET", "SCHOOL", "SILVER", "SPIRIT", "SPRING", "STREAM", "SUMMER", "THRONE",
+    "TOMATO", "TUNNEL", "VELVET", "VISION", "WINTER", "BUTTER", "CHEESE", "FATHER", "MOTHER", "BREEZE",
+    "BRIGHT", "BROKEN", "CAMPER", "DINNER", "FINGER", "GALAXY", "HAMMER", "KETTLE", "LETTER", "MELODY",
+    "MIRROR", "PIRATE", "SHADOW", "SILENT", "SPIDER", "SPONGE", "MARBLE", "WALNUT", "GENTLE", "POWDER"
+  ]
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -115,14 +137,35 @@ function pickUniqueWords(length: number, count: number, seed: number) {
   return chosen;
 }
 
+function getWordCount(id: number) {
+  if (id <= 15) return 2;
+  if (id <= 35) return 3;
+  if (id <= 60) return 4;
+  if (id <= 80) return 5;
+  if (id <= 92) return 6;
+  return 7;
+}
+
+function getCapacity(id: number) {
+  if (id <= 25) return 4;
+  if (id <= 50) return 5;
+  return 6;
+}
+
+function estimatePar(wordCount: number, capacity: number, scrambleMoves: number) {
+  const base = Math.ceil(scrambleMoves * 0.72);
+  const structure = Math.ceil(wordCount * 1.2) + Math.ceil(capacity * 0.8);
+  return Math.max(base, structure);
+}
+
 function makeLevel(index: number): LevelDef {
   const id = index + 1;
-  const capacity = id <= 34 ? 4 : id <= 67 ? 5 : 6;
-  const wordCount = capacity === 4 ? 4 : capacity === 5 ? 5 : 6;
+  const capacity = getCapacity(id);
+  const wordCount = getWordCount(id);
   const seed = 1000 + id * 97;
   const words = pickUniqueWords(capacity, wordCount, seed + 17);
-  const scrambleMoves = 22 + id * 2 + (capacity - 4) * 6;
-  const par = wordCount * capacity + Math.floor(id * 0.8);
+  const scrambleMoves = 18 + id * 2 + (wordCount - 4) * 3 + (capacity - 4) * 4;
+  const par = estimatePar(wordCount, capacity, scrambleMoves);
   return { id, capacity, words, seed, scrambleMoves, par, title: `Level ${id}` };
 }
 
@@ -253,7 +296,7 @@ function formatElapsed(ms: number) {
 function TubeBall({ letter, largeText, selected }: { letter: string; largeText: boolean; selected: boolean }) {
   return (
     <div
-      className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/95 text-slate-900 shadow-md sm:h-12 sm:w-12 ${largeText ? "text-xl" : "text-lg"} font-bold transition-transform ${selected ? "scale-105 ring-4 ring-yellow-300" : ""}`}
+      className={`flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-900 shadow-md sm:h-12 sm:w-12 ${largeText ? "text-xl" : "text-lg"} font-bold transition-transform ${selected ? "scale-105 ring-4 ring-yellow-300" : ""}`}
     >
       {letter}
     </div>
@@ -269,6 +312,7 @@ function TubeView({
   solved,
   largeText,
   bounce,
+  theme,
 }: {
   tube: Tube;
   index: number;
@@ -278,16 +322,20 @@ function TubeView({
   solved: boolean;
   largeText: boolean;
   bounce?: boolean;
+  theme: "night" | "light";
 }) {
   const slots = Array.from({ length: capacity }, (_, i) => tube[i] ?? null);
   const topIndex = tube.length - 1;
+  const baseClasses = theme === "night"
+    ? "border-white/70 bg-white/5 hover:bg-white/10"
+    : "border-slate-400 bg-white/70 hover:bg-white/90 shadow-sm";
   return (
     <button
       onClick={onClick}
-      className={`relative flex h-[260px] w-[72px] flex-col-reverse items-center rounded-[28px] border-2 px-1.5 pb-3 pt-5 transition-all sm:h-[300px] sm:w-[82px] sm:px-2 ${bounce ? "animate-[tubeBounce_0.22s_ease-in-out]" : ""} ${selected ? "border-yellow-300 bg-yellow-200/10 shadow-[0_0_18px_rgba(253,224,71,0.35)]" : "border-white/70 bg-white/5 hover:bg-white/10"} ${solved ? "outline outline-2 outline-emerald-400" : ""}`}
+      className={`relative flex h-[260px] w-[72px] flex-col-reverse items-center rounded-[28px] border-2 px-1.5 pb-3 pt-5 transition-all sm:h-[300px] sm:w-[82px] sm:px-2 ${bounce ? "animate-[tubeBounce_0.22s_ease-in-out]" : ""} ${selected ? "border-yellow-300 bg-yellow-200/20 shadow-[0_0_18px_rgba(253,224,71,0.35)]" : baseClasses} ${solved ? "outline outline-2 outline-emerald-400" : ""}`}
       aria-label={`Tube ${index + 1}`}
     >
-      <div className="absolute inset-x-3 bottom-1.5 h-1.5 rounded-full bg-white/80" />
+      <div className={`absolute inset-x-3 bottom-1.5 h-1.5 rounded-full ${theme === "night" ? "bg-white/80" : "bg-slate-400"}`} />
       <div className="flex h-full flex-col-reverse items-center justify-start gap-1.5 sm:gap-2">
         {slots.map((letter, i) => (
           <div key={`${index}-${i}`} className="flex h-11 w-11 items-center justify-center sm:h-12 sm:w-12">
@@ -300,20 +348,20 @@ function TubeView({
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string | number }) {
+function StatCard({ label, value, theme }: { label: string; value: string | number; theme: "night" | "light" }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/20 p-3 text-center">
+    <div className={`rounded-2xl border p-3 text-center ${theme === "night" ? "border-white/10 bg-black/20" : "border-slate-200 bg-white/80"}`}>
       <div className="text-xs uppercase tracking-[0.18em] text-slate-400">{label}</div>
-      <div className="mt-1 text-lg font-bold text-white">{value}</div>
+      <div className={`mt-1 text-lg font-bold ${theme === "night" ? "text-white" : "text-slate-900"}`}>{value}</div>
     </div>
   );
 }
 
 function StarRow({ count }: { count: number }) {
   return (
-    <span className="text-yellow-300">
+    <span className="text-yellow-400">
       {"★".repeat(count)}
-      <span className="text-slate-600">{"★".repeat(3 - count)}</span>
+      <span className="text-slate-400">{"★".repeat(3 - count)}</span>
     </span>
   );
 }
@@ -331,20 +379,15 @@ export default function WordSortPuzzleFullGame() {
   const [now, setNow] = useState(Date.now());
   const [message, setMessage] = useState("Welcome to Word Sort Puzzle.");
   const [animatingMove, setAnimatingMove] = useState<AnimatingMove | null>(null);
+  const [showWinModal, setShowWinModal] = useState(false);
 
   const level = LEVELS[levelId - 1];
   const completedCount = useMemo(() => Object.keys(progress.completed).length, [progress.completed]);
   const currentStars = useMemo(() => getStars(moveCount, level?.par ?? 1), [moveCount, level]);
   const solved = useMemo(() => (level ? isLevelSolved(tubes, level, settings.readDirection) : false), [tubes, level, settings.readDirection]);
 
-  useEffect(() => {
-    saveJSON(STORAGE_SETTINGS, settings);
-  }, [settings]);
-
-  useEffect(() => {
-    saveJSON(STORAGE_PROGRESS, progress);
-  }, [progress]);
-
+  useEffect(() => { saveJSON(STORAGE_SETTINGS, settings); }, [settings]);
+  useEffect(() => { saveJSON(STORAGE_PROGRESS, progress); }, [progress]);
   useEffect(() => {
     const interval = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(interval);
@@ -357,7 +400,7 @@ export default function WordSortPuzzleFullGame() {
   }, [levelId, tubes, history, moveCount, startedAt, level]);
 
   useEffect(() => {
-    if (!solved || !level) return;
+    if (!solved || !level || showWinModal) return;
     playSfx("win", settings.sound && settings.soundFx);
     vibrate([80, 50, 120], settings.vibration);
     const previousBest = progress.completed[level.id]?.bestMoves ?? null;
@@ -369,8 +412,9 @@ export default function WordSortPuzzleFullGame() {
       completed: { ...prev.completed, [level.id]: { bestMoves } },
     }));
     setMessage(`Level complete! You used ${moveCount} moves and earned ${getStars(moveCount, level.par)} stars.`);
+    setShowWinModal(true);
     localStorage.removeItem(STORAGE_IN_PROGRESS);
-  }, [solved, level, moveCount, progress.completed, settings.sound, settings.soundFx, settings.vibration]);
+  }, [solved, level, moveCount, progress.completed, settings.sound, settings.soundFx, settings.vibration, showWinModal]);
 
   function startLevel(targetLevelId: number, restore?: InProgressData) {
     const chosenLevel = LEVELS[targetLevelId - 1];
@@ -383,6 +427,7 @@ export default function WordSortPuzzleFullGame() {
     setStartedAt(restore ? restore.startedAt : Date.now());
     setSelectedTube(null);
     setAnimatingMove(null);
+    setShowWinModal(false);
     setMessage(`Level ${targetLevelId} started. Build all words.`);
     setView("game");
   }
@@ -393,19 +438,12 @@ export default function WordSortPuzzleFullGame() {
     else startLevel(progress.currentLevel || 1);
   }
 
-  function newGame() {
-    startLevel(1);
-  }
-
-  function restartLevel() {
-    if (level) startLevel(level.id);
-  }
-
+  function newGame() { startLevel(1); }
+  function restartLevel() { if (level) startLevel(level.id); }
   function nextLevel() {
     const next = clamp(levelId + 1, 1, progress.unlockedLevel);
     if (next !== levelId) startLevel(next);
   }
-
   function previousLevel() {
     const prev = clamp(levelId - 1, 1, TOTAL_LEVELS);
     if (prev <= progress.unlockedLevel) startLevel(prev);
@@ -421,8 +459,8 @@ export default function WordSortPuzzleFullGame() {
     setMessage("Last move undone.");
   }
 
-  async function handleTubeClick(index: number) {
-    if (!level || solved || animatingMove) return;
+  function handleTubeClick(index: number) {
+    if (!level || solved || animatingMove || showWinModal) return;
     if (selectedTube === null) {
       if (tubes[index].length === 0) {
         setMessage("Choose a tube that has a top letter.");
@@ -437,7 +475,6 @@ export default function WordSortPuzzleFullGame() {
       setMessage("Selection cleared.");
       return;
     }
-
     const fromIndex = selectedTube;
     const source = tubes[fromIndex];
     const destination = tubes[index];
@@ -450,14 +487,12 @@ export default function WordSortPuzzleFullGame() {
       setMessage("Destination tube is full.");
       return;
     }
-
     const movingLetter = source[source.length - 1];
     const nextTubes = tubes.map((tube, tubeIndex) => {
       if (tubeIndex === fromIndex) return tube.slice(0, -1);
       if (tubeIndex === index) return [...tube, movingLetter];
       return [...tube];
     });
-
     setHistory((prev) => [...prev, deepCopyTubes(tubes)]);
     setTubes(nextTubes);
     setMoveCount((prev) => prev + 1);
@@ -465,13 +500,8 @@ export default function WordSortPuzzleFullGame() {
     setAnimatingMove({ tubeIndex: index, letter: movingLetter });
     playSfx("move", settings.sound && settings.soundFx);
     vibrate(15, settings.vibration);
-
-    if (settings.reducedMotion) {
-      setAnimatingMove(null);
-    } else {
-      window.setTimeout(() => setAnimatingMove(null), 220);
-    }
-
+    if (settings.reducedMotion) setAnimatingMove(null);
+    else window.setTimeout(() => setAnimatingMove(null), 220);
     const completedTube = isTubeSolved(nextTubes[index], level, settings.readDirection) || isTubeSolved(nextTubes[fromIndex], level, settings.readDirection);
     setMessage(completedTube ? "Great! You completed a word." : `You moved letter ${movingLetter}. Keep going.`);
   }
@@ -491,12 +521,14 @@ export default function WordSortPuzzleFullGame() {
     setMessage("Progress reset.");
   }
 
-  const themeClasses = settings.theme === "night"
+  const isNight = settings.theme === "night";
+  const themeClasses = isNight
     ? "bg-[radial-gradient(circle_at_top,_#1f2940,_#0b1020_45%,_#05070d_100%)] text-white"
-    : "bg-[radial-gradient(circle_at_top,_#f8fbff,_#dde8ff_48%,_#c7d5f6_100%)] text-slate-900";
-  const cardClasses = settings.theme === "night" ? "border-white/10 bg-white/5" : "border-slate-300/60 bg-white/60";
-  const textSoft = settings.theme === "night" ? "text-slate-300" : "text-slate-700";
-  const chip = settings.theme === "night" ? "border-white/10 bg-black/20" : "border-slate-200 bg-white/80";
+    : "bg-[radial-gradient(circle_at_top,_#ffffff,_#eef4ff_50%,_#dfe9fb_100%)] text-slate-900";
+  const cardClasses = isNight ? "border-white/10 bg-white/5" : "border-slate-200 bg-white/85 shadow-sm";
+  const textSoft = isNight ? "text-slate-300" : "text-slate-600";
+  const chip = isNight ? "border-white/10 bg-black/20 text-white" : "border-slate-200 bg-white text-slate-900";
+  const inputClasses = isNight ? "rounded-xl border border-white/20 bg-transparent px-3 py-1 text-white" : "rounded-xl border border-slate-300 bg-white px-3 py-1 text-slate-900";
 
   return (
     <div className={`min-h-screen w-full ${themeClasses} p-3 sm:p-4 md:p-6`}>
@@ -513,7 +545,7 @@ export default function WordSortPuzzleFullGame() {
         <header className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl font-black tracking-tight sm:text-3xl">Word Sort Puzzle</h1>
-            <p className={`mt-1 text-sm ${textSoft}`}>100 predefined levels, saved progress, responsive layout, bounce feedback, and sound effects.</p>
+            <p className={`mt-1 text-sm ${textSoft}`}>Starts with 2 words in 4 total tubes, then grows progressively, with improved par targets and a modal win state.</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <button className={`rounded-2xl border px-4 py-2 text-sm font-semibold ${chip}`} onClick={() => setView("menu")}>Menu</button>
@@ -526,13 +558,13 @@ export default function WordSortPuzzleFullGame() {
           <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
             <section className={`rounded-3xl border p-5 shadow-2xl backdrop-blur-md sm:p-6 ${cardClasses}`}>
               <div className="max-w-2xl">
-                <div className="mb-4 inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">Educational puzzle</div>
+                <div className="mb-4 inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-500">Educational puzzle</div>
                 <h2 className="text-3xl font-black sm:text-5xl">Sort letters and build complete words</h2>
-                <p className={`mt-4 max-w-xl text-sm sm:text-base ${textSoft}`}>Inspired by Ball Sort Puzzle, but built around words. Every tube must end up containing one full word. Tube capacity increases from 4 to 6 as you progress.</p>
+                <p className={`mt-4 max-w-xl text-sm sm:text-base ${textSoft}`}>Inspired by Ball Sort Puzzle, but built around words. Every tube must end up containing one full word. Early levels start with 2 words and 2 empty helper tubes, then scale up progressively.</p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <button className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:scale-[1.02]" onClick={continueGame}>Continue</button>
-                  <button className="rounded-2xl border border-white/10 bg-white/10 px-5 py-3 text-sm font-bold" onClick={newGame}>New Game</button>
-                  <button className="rounded-2xl border border-white/10 bg-white/10 px-5 py-3 text-sm font-bold" onClick={() => setView("levels")}>Select Level</button>
+                  <button className={`rounded-2xl border px-5 py-3 text-sm font-bold ${chip}`} onClick={newGame}>New Game</button>
+                  <button className={`rounded-2xl border px-5 py-3 text-sm font-bold ${chip}`} onClick={() => setView("levels")}>Select Level</button>
                 </div>
               </div>
             </section>
@@ -541,12 +573,12 @@ export default function WordSortPuzzleFullGame() {
               <div className={`rounded-3xl border p-4 shadow-2xl backdrop-blur-md ${cardClasses}`}>
                 <div className="mb-3 text-sm font-semibold">Overall progress</div>
                 <div className="grid grid-cols-2 gap-3">
-                  <StatCard label="Unlocked" value={progress.unlockedLevel} />
-                  <StatCard label="Completed" value={`${completedCount}/${TOTAL_LEVELS}`} />
+                  <StatCard label="Unlocked" value={progress.unlockedLevel} theme={settings.theme} />
+                  <StatCard label="Completed" value={`${completedCount}/${TOTAL_LEVELS}`} theme={settings.theme} />
                 </div>
                 <div className="mt-4">
                   <div className="mb-2 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-400"><span>Progress</span><span>{Math.round((completedCount / TOTAL_LEVELS) * 100)}%</span></div>
-                  <div className="h-3 overflow-hidden rounded-full bg-black/20"><div className="h-full rounded-full bg-emerald-500" style={{ width: `${(completedCount / TOTAL_LEVELS) * 100}%` }} /></div>
+                  <div className={`h-3 overflow-hidden rounded-full ${isNight ? "bg-black/20" : "bg-slate-200"}`}><div className="h-full rounded-full bg-emerald-500" style={{ width: `${(completedCount / TOTAL_LEVELS) * 100}%` }} /></div>
                 </div>
               </div>
 
@@ -568,7 +600,7 @@ export default function WordSortPuzzleFullGame() {
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h2 className="text-2xl font-black">Level Select</h2>
-                <p className={`text-sm ${textSoft}`}>100 predefined levels. Tube capacity grows up to 6.</p>
+                <p className={`text-sm ${textSoft}`}>100 predefined levels. Total tube count starts at 4 and grows progressively, while capacity grows to 6.</p>
               </div>
               <div className={`rounded-2xl border px-3 py-2 text-sm ${chip}`}>Unlocked through level {progress.unlockedLevel}</div>
             </div>
@@ -579,7 +611,7 @@ export default function WordSortPuzzleFullGame() {
                 return (
                   <button key={item.id} disabled={!unlocked} onClick={() => unlocked && startLevel(item.id)} className={`rounded-2xl border p-3 text-left transition ${unlocked ? "hover:scale-[1.02]" : "cursor-not-allowed opacity-40"} ${item.id === progress.currentLevel ? "border-emerald-400 bg-emerald-500/10" : chip}`}>
                     <div className="text-sm font-bold">{item.id}</div>
-                    <div className={`mt-1 text-[11px] ${textSoft}`}>Cap {item.capacity}</div>
+                    <div className={`mt-1 text-[11px] ${textSoft}`}>{item.words.length} tubes • cap {item.capacity}</div>
                     <div className="mt-2 text-[11px]">{best !== null ? <StarRow count={getStars(best, item.par)} /> : "—"}</div>
                   </button>
                 );
@@ -605,19 +637,18 @@ export default function WordSortPuzzleFullGame() {
                   <label className="flex items-center justify-between gap-3"><span>Reduced motion</span><input type="checkbox" checked={settings.reducedMotion} onChange={(e) => setSettings({ ...settings, reducedMotion: e.target.checked })} /></label>
                 </div>
               </div>
-
               <div className={`rounded-2xl border p-4 ${chip}`}>
                 <div className="mb-3 font-semibold">Interface</div>
                 <div className="space-y-3 text-sm">
                   <label className="flex items-center justify-between gap-3"><span>Larger text</span><input type="checkbox" checked={settings.largeText} onChange={(e) => setSettings({ ...settings, largeText: e.target.checked })} /></label>
-                  <label className="flex items-center justify-between gap-3"><span>Theme</span><select value={settings.theme} onChange={(e) => setSettings({ ...settings, theme: e.target.value as Settings["theme"] })} className="rounded-xl border bg-transparent px-3 py-1"><option value="night">Night</option><option value="light">Light</option></select></label>
-                  <label className="flex items-center justify-between gap-3"><span>Word direction</span><select value={settings.readDirection} onChange={(e) => setSettings({ ...settings, readDirection: e.target.value as ReadDirection })} className="rounded-xl border bg-transparent px-3 py-1"><option value="bottom-up">Bottom → Top</option><option value="top-down">Top → Bottom</option></select></label>
+                  <label className="flex items-center justify-between gap-3"><span>Theme</span><select value={settings.theme} onChange={(e) => setSettings({ ...settings, theme: e.target.value as Settings["theme"] })} className={inputClasses}><option value="night">Night</option><option value="light">Light</option></select></label>
+                  <label className="flex items-center justify-between gap-3"><span>Word direction</span><select value={settings.readDirection} onChange={(e) => setSettings({ ...settings, readDirection: e.target.value as ReadDirection })} className={inputClasses}><option value="bottom-up">Bottom → Top</option><option value="top-down">Top → Bottom</option></select></label>
                 </div>
               </div>
             </div>
             <div className="mt-4 flex flex-wrap gap-3">
-              <button className="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-300" onClick={resetAllProgress}>Reset Progress</button>
-              <button className="rounded-2xl border px-4 py-2 text-sm font-semibold" onClick={() => setView("menu")}>Back to Menu</button>
+              <button className="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-500" onClick={resetAllProgress}>Reset Progress</button>
+              <button className={`rounded-2xl border px-4 py-2 text-sm font-semibold ${chip}`} onClick={() => setView("menu")}>Back to Menu</button>
             </div>
           </section>
         )}
@@ -627,13 +658,13 @@ export default function WordSortPuzzleFullGame() {
             <div className={`rounded-3xl border p-3 shadow-2xl backdrop-blur-md sm:p-4 ${cardClasses}`}>
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <div className="text-xs uppercase tracking-[0.2em] text-emerald-300">{level.title}</div>
-                  <h2 className="text-2xl font-black">Capacity {level.capacity}</h2>
+                  <div className="text-xs uppercase tracking-[0.2em] text-emerald-500">{level.title}</div>
+                  <h2 className="text-2xl font-black">{level.words.length} words • {level.words.length + EMPTY_TUBES} tubes • capacity {level.capacity}</h2>
                 </div>
                 <div className="grid grid-cols-3 gap-2 sm:flex">
                   <div className={`rounded-2xl border px-3 py-2 text-sm ${chip}`}>Moves: {moveCount}</div>
                   <div className={`rounded-2xl border px-3 py-2 text-sm ${chip}`}>Time: {formatElapsed(now - startedAt)}</div>
-                  <div className={`rounded-2xl border px-3 py-2 text-sm ${chip}`}>Stars: <StarRow count={currentStars} /></div>
+                  <div className={`rounded-2xl border px-3 py-2 text-sm ${chip}`}>Par: {level.par}</div>
                 </div>
               </div>
 
@@ -641,7 +672,7 @@ export default function WordSortPuzzleFullGame() {
                 <div className="mb-4 flex flex-wrap gap-2">
                   {level.words.map((word) => {
                     const done = tubes.some((tube) => getTubeWord(tube, settings.readDirection) === word);
-                    return <span key={word} className={`rounded-full border px-3 py-1 text-xs font-semibold ${done ? "border-emerald-400 bg-emerald-500/20 text-emerald-200" : chip}`}>{word}</span>;
+                    return <span key={word} className={`rounded-full border px-3 py-1 text-xs font-semibold ${done ? "border-emerald-400 bg-emerald-500/20 text-emerald-600" : chip}`}>{word}</span>;
                   })}
                 </div>
               )}
@@ -659,6 +690,7 @@ export default function WordSortPuzzleFullGame() {
                       solved={isTubeSolved(tube, level, settings.readDirection)}
                       largeText={settings.largeText}
                       bounce={animatingMove?.tubeIndex === index}
+                      theme={settings.theme}
                     />
                   ))}
                 </div>
@@ -670,13 +702,13 @@ export default function WordSortPuzzleFullGame() {
                 <div className="mb-3 text-lg font-bold">Controls</div>
                 <div className="grid grid-cols-2 gap-2">
                   <button className="rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-bold text-white" onClick={undoMove}>Undo</button>
-                  <button className="rounded-2xl border px-4 py-3 text-sm font-bold" onClick={restartLevel}>Restart</button>
-                  <button className="rounded-2xl border px-4 py-3 text-sm font-bold" onClick={revealHint}>Hint</button>
-                  <button className="rounded-2xl border px-4 py-3 text-sm font-bold" onClick={() => setView("levels")}>Levels</button>
+                  <button className={`rounded-2xl border px-4 py-3 text-sm font-bold ${chip}`} onClick={restartLevel}>Restart</button>
+                  <button className={`rounded-2xl border px-4 py-3 text-sm font-bold ${chip}`} onClick={revealHint}>Hint</button>
+                  <button className={`rounded-2xl border px-4 py-3 text-sm font-bold ${chip}`} onClick={() => setView("levels")}>Levels</button>
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-2">
-                  <button className="rounded-2xl border px-4 py-2 text-sm font-semibold" onClick={previousLevel} disabled={levelId <= 1}>◀ Prev</button>
-                  <button className="rounded-2xl border px-4 py-2 text-sm font-semibold" onClick={nextLevel} disabled={levelId >= progress.unlockedLevel}>Next ▶</button>
+                  <button className={`rounded-2xl border px-4 py-2 text-sm font-semibold ${chip}`} onClick={previousLevel} disabled={levelId <= 1}>◀ Prev</button>
+                  <button className={`rounded-2xl border px-4 py-2 text-sm font-semibold ${chip}`} onClick={nextLevel} disabled={levelId >= progress.unlockedLevel}>Next ▶</button>
                 </div>
               </div>
 
@@ -685,25 +717,35 @@ export default function WordSortPuzzleFullGame() {
                 <div className={`rounded-2xl border p-4 text-sm ${chip}`}>{message}</div>
                 <div className={`mt-3 space-y-2 text-sm ${textSoft}`}>
                   <p>Direction: {settings.readDirection === "bottom-up" ? "bottom to top" : "top to bottom"}</p>
-                  <p>Par target: {level.par} moves</p>
+                  <p>Words: {level.words.length} • Total tubes: {level.words.length + EMPTY_TUBES}</p>
                   <p>Save system: automatic</p>
                 </div>
               </div>
-
-              {solved && (
-                <div className="rounded-3xl border border-emerald-400/30 bg-emerald-500/10 p-4 shadow-2xl">
-                  <div className="text-xl font-black text-emerald-200">Level Complete!</div>
-                  <div className="mt-2 text-sm text-emerald-100">You finished the level in <strong>{moveCount}</strong> moves and earned <strong>{getStars(moveCount, level.par)}</strong> stars.</div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <button className="rounded-2xl bg-emerald-500 px-4 py-2 text-sm font-bold text-white" onClick={() => startLevel(clamp(levelId + 1, 1, progress.unlockedLevel))}>Continue</button>
-                    <button className="rounded-2xl border px-4 py-2 text-sm font-bold" onClick={() => setView("levels")}>Choose Level</button>
-                  </div>
-                </div>
-              )}
             </aside>
           </section>
         )}
       </div>
+
+      {showWinModal && level && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className={`w-full max-w-md rounded-3xl border p-6 shadow-2xl ${cardClasses}`}>
+            <div className="text-center">
+              <div className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-500">Level Complete</div>
+              <h3 className="mt-2 text-3xl font-black">Great job!</h3>
+              <p className={`mt-3 text-sm ${textSoft}`}>You finished level {level.id} with {moveCount} moves.</p>
+            </div>
+            <div className="mt-5 grid grid-cols-3 gap-3">
+              <StatCard label="Moves" value={moveCount} theme={settings.theme} />
+              <StatCard label="Par" value={level.par} theme={settings.theme} />
+              <StatCard label="Stars" value={getStars(moveCount, level.par)} theme={settings.theme} />
+            </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <button className="flex-1 rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-bold text-white" onClick={() => startLevel(clamp(levelId + 1, 1, progress.unlockedLevel))}>Next Level</button>
+              <button className={`flex-1 rounded-2xl border px-4 py-3 text-sm font-bold ${chip}`} onClick={() => { setShowWinModal(false); setView("levels"); }}>Choose Level</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
