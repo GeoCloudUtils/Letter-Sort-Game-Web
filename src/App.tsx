@@ -47,7 +47,7 @@ type AnimatingMove = {
 
 const STORAGE_SETTINGS = "word-sort-settings-v2";
 const STORAGE_PROGRESS = "word-sort-progress-v2";
-const STORAGE_IN_PROGRESS = "word-sort-in-progress-v2";
+const STORAGE_IN_PROGRESS = "word-sort-in-progress-v3";
 const TOTAL_LEVELS = 100;
 const EMPTY_TUBES = 2;
 
@@ -152,10 +152,8 @@ function getWordCount(id: number) {
   return 7;
 }
 
-function getCapacity(id: number) {
-  if (id <= 25) return 4;
-  if (id <= 50) return 5;
-  return 6;
+function getCapacity() {
+  return 4;
 }
 
 function estimatePar(wordCount: number, capacity: number, scrambleMoves: number) {
@@ -166,7 +164,7 @@ function estimatePar(wordCount: number, capacity: number, scrambleMoves: number)
 
 function makeLevel(index: number): LevelDef {
   const id = index + 1;
-  const capacity = getCapacity(id);
+  const capacity = getCapacity();
   const wordCount = getWordCount(id);
   const seed = 1000 + id * 97;
   const words = pickUniqueWords(capacity, wordCount, seed + 17);
@@ -507,8 +505,21 @@ export default function WordSortPuzzleModern() {
 
   function continueGame() {
     const inProgress = loadJSON<InProgressData | null>(STORAGE_IN_PROGRESS, null);
-    if (inProgress && inProgress.levelId) startLevel(inProgress.levelId, inProgress);
-    else startLevel(progress.currentLevel || 1);
+    if (inProgress && inProgress.levelId) {
+      const restoreLevel = LEVELS[inProgress.levelId - 1];
+      const validRestore =
+        !!restoreLevel &&
+        inProgress.tubes.length === restoreLevel.words.length + EMPTY_TUBES &&
+        inProgress.tubes.every((tube) => tube.length <= restoreLevel.capacity) &&
+        restoreLevel.words.every((word) => word.length === restoreLevel.capacity);
+
+      if (validRestore) {
+        startLevel(inProgress.levelId, inProgress);
+        return;
+      }
+    }
+
+    startLevel(progress.currentLevel || 1);
   }
 
   function newGame() { startLevel(1); }
