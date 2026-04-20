@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Tube = string[];
 type View = "menu" | "levels" | "settings" | "game";
@@ -383,7 +383,6 @@ export default function WordSortPuzzleFullGame() {
 
   const level = LEVELS[levelId - 1];
   const completedCount = useMemo(() => Object.keys(progress.completed).length, [progress.completed]);
-  const currentStars = useMemo(() => getStars(moveCount, level?.par ?? 1), [moveCount, level]);
   const solved = useMemo(() => (level ? isLevelSolved(tubes, level, settings.readDirection) : false), [tubes, level, settings.readDirection]);
 
   useEffect(() => { saveJSON(STORAGE_SETTINGS, settings); }, [settings]);
